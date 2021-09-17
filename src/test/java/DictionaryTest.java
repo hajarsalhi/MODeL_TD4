@@ -1,44 +1,50 @@
-import static org.junit.Assert.*;
-//import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+
 
 public class DictionaryTest {
 	
 	Dictionary dict ;
-
-	@Before public void initialize() {
+	
+	@BeforeAll public void initialize() {
 		 dict = new Dictionary("Example");
+		 dict.getTranslation("fly").add("mouche");
+		 dict.getTranslation("fly").add("voler");
+
+		 
 	}
 	
 	@Test public void testDictionaryName() {
 		 assertEquals(dict.getName(),"Example");
 	 }
 	
-	
-	@Before public void initializeMap() {
-		dict = new Dictionary("Example", new HashMap<String,String>());
-		//dict.addTranslation("flowers","fleurs");
-		//dict.addTranslation("Empty", "vide");
-	}
-	@Test public void testDictionaryEmptiness() {
-		assertTrue(dict.getTranslations().isEmpty());
-	}
-	
 	@After public void clearTranslations() {
 		dict.getTranslations().clear();
 	}
 	
+	@Test public void testDictionaryEmptiness() {
+		assertTrue(dict.getTranslations().isEmpty());
+	}
+	
+	
+	
 	@Before public void verifyEmptiness() {
 		if (dict.getTranslations().isEmpty()) {
-			initializeMap();
+			initialize();
 		};
 	}
+	
 	
 	@Test public void testOneTranslation() {
 		
@@ -46,10 +52,16 @@ public class DictionaryTest {
 		assertEquals(dict.getTranslation("contre"), "against");
 	}
 	
-	@After public void clearDictionary(){
-		dict.setName(""); 
+	@AfterAll public void clearDictionary(){
 		clearTranslations();
-		System.out.println(dict);
 	}
+	
+	
+	
+	@Test public void testMultipleTranslations() {
+		assertThat(dict.getTranslation("fly"),containsInAnyOrder("voler","mouche"));
+	}
+	
+	
 	
 }

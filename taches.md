@@ -12,3 +12,7 @@
 [FI1] 11- tester pour passer 
 
 ----------------------------------
+Traduction multiples
+------------------------------
+
+1-on pourra stocker ces traductions dans un ArrayList
