@@ -10,3 +10,5 @@
 [FI1] 9- 	vérifier que le test ne passe passe
 [FI1] 10-  	créer une liste de chaines de caractères vide dans la classe Dictionary + getter & setter
 [FI1] 11- tester pour passer 
+
+----------------------------------
